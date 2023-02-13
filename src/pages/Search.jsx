@@ -56,13 +56,13 @@ const Search = () => {
                   <span className="w-[145px] text-[16px] leading-[12px] text-[#606060]">
                     ImdbId
                   </span>
-                  <span className="flex-1">{mv.ImdbID}</span>
+                  <span className="flex-1">{mv.imdbID}</span>
                 </div>
                 <div className="flex items-center">
                   <span className="w-[145px] text-[16px] leading-[12px] text-[#606060]">
                     Type
                   </span>
-                  <span className="flex-1">{mv.type}</span>
+                  <span className="flex-1">{mv.Type}</span>
                 </div>
               </div>
             </div>

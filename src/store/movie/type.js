@@ -1,0 +1,5 @@
+export const movieType = {
+  SET_LOADING: "SET_LOADING",
+  POPULATE_DATA: "POPULATE_DATA",
+  SET_ERROR: "SET_ERROR",
+};

@@ -1,8 +1,8 @@
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./App.css";
 
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Home from "./pages/Home";
 import Wrapper from "./components/Wrapper";
+import Home from "./pages/Home";
 import Search from "./pages/Search";
 import Detail from "./pages/Detail";
 import SignIn from "./pages/SignIn";
@@ -42,9 +42,10 @@ const router = createBrowserRouter([
     ),
   },
 ]);
+
 function App() {
   return (
-    <div className="min-h-screen min-w-full bg-bgPrimary text-white">
+    <div className="min-h-screen min-w-full bg-bgPrimary text-white duration-75">
       <RouterProvider router={router} />
     </div>
   );

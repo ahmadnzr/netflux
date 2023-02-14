@@ -16,12 +16,12 @@ const Navbar = () => {
         <Link to={"/search"}>Search</Link>
       </div>
       <div className="flex gap-3">
-        <button className="px-[30px] py-[10px] rounded-[12px] text-[#1D4ED8]">
+        <Link to={"/signin"} className="px-[30px] py-[10px] rounded-[12px] text-[#1D4ED8]">
+          Sign In
+        </Link>
+        <Link to={"/signup"} className="px-[30px] py-[10px] bg-[#1D4ED8] rounded-[12px] text-white">
           Sign up
-        </button>
-        <button className="px-[30px] py-[10px] bg-[#1D4ED8] rounded-[12px] text-white">
-          Sign up
-        </button>
+        </Link>
       </div>
     </nav>
   );

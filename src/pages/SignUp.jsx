@@ -1,45 +1,66 @@
-import React from "react";
+import React, { useState } from "react";
 import { Form, Field } from "react-final-form";
-import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
 
 import batman from "../assets/batman.jpg";
+import { addUser } from "../store/user/service";
+
+const validation = (field) => {
+  const errors = {};
+
+  // required validation
+  if (!field.userId) {
+    errors.userId = "Required";
+  }
+  if (!field.email) {
+    errors.email = "Required";
+  }
+  if (!field.password) {
+    errors.password = "Required";
+  }
+  if (!field.cPassword) {
+    errors.cPassword = "Required";
+  }
+
+  // cPassword not same
+  if (field.cPassword && field.password !== field.cPassword) {
+    errors.cPassword = "Invalid password confirmation";
+  }
+
+  // invalid email
+  if (field.email) {
+    const testValid = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/i;
+    if (!testValid.test(field.email)) {
+      errors.email = "Invalid email";
+    }
+  }
+
+  return errors;
+};
 
 const SignUp = () => {
-  const validation = (field) => {
-    const errors = {};
+  const [error, setError] = useState("");
 
-    // required validation
-    if (!field.userId) {
-      errors.userId = "Required";
-    }
-    if (!field.email) {
-      errors.email = "Required";
-    }
-    if (!field.password) {
-      errors.password = "Required";
-    }
-    if (!field.cPassword) {
-      errors.cPassword = "Required";
-    }
+  const dispatch = useDispatch();
+  const { data } = useSelector((state) => state.user);
 
-    // cPassword not same
-    if (field.cPassword && field.password !== field.cPassword) {
-      errors.cPassword = "Invalid password confirmation";
-    }
-
-    // invalid email
-    if (field.email) {
-      const testValid = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/i;
-      if (!testValid.test(field.email)) {
-        errors.email = "Invalid email";
-      }
-    }
-
-    return errors;
-  };
-
+  const navigate = useNavigate();
+  
   const onSubmit = (values) => {
-    console.log(values);
+    const { cPassword, ...other } = values;
+
+    const userFound = data?.find(
+      (usr) => usr.userId === other.userId || usr.email === other.email
+    );
+
+    if (userFound) {
+      setError("userId already used");
+      return;
+    }
+
+    dispatch(addUser(other));
+    navigate("/signin");
   };
 
   return (
@@ -47,7 +68,7 @@ const SignUp = () => {
       <div className=" w-[1440px] absolute flex bg-white text-black top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%] rounded-[24px] overflow-hidden">
         <div className="flex-1 flex flex-col justify-center text-center">
           <h1 className="mb-[15px] font-bold text-[48px] leading-[58px] text-[#0B2F8A]">
-            Sign In
+            Sign Up
           </h1>
           <Form
             onSubmit={onSubmit}
@@ -131,6 +152,9 @@ const SignUp = () => {
                     </div>
                   )}
                 </Field>
+                {error.length ? (
+                  <span className="text-xs text-red-500">{error}</span>
+                ) : null}
                 <div className="text-center">
                   <button className="px-[75px] py-[14px] bg-[#0B2F8A] shadow-md text-white rounded-lg">
                     Sign Up

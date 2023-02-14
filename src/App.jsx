@@ -5,8 +5,13 @@ import Home from "./pages/Home";
 import Wrapper from "./pages/Wrapper";
 import Search from "./pages/Search";
 import Detail from "./pages/Detail";
+import SignIn from "./pages/SignIn";
 
 const router = createBrowserRouter([
+  {
+    path: "/signin",
+    element: <SignIn />,
+  },
   {
     path: "/",
     element: (
@@ -35,9 +40,7 @@ const router = createBrowserRouter([
 function App() {
   return (
     <div className="min-h-screen min-w-full bg-bgPrimary text-white">
-      <div className="max-w-[1512px] mx-auto px-[81px] pt-[18px] pb-[50px]">
-        <RouterProvider router={router} />
-      </div>
+      <RouterProvider router={router} />
     </div>
   );
 }

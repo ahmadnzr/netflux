@@ -4,8 +4,39 @@ import { Link } from "react-router-dom";
 
 import batman from "../assets/batman.jpg";
 
-const SignIn = () => {
-  const required = (value) => (value ? undefined : "required");
+const SignUp = () => {
+  const validation = (field) => {
+    const errors = {};
+
+    // required validation
+    if (!field.userId) {
+      errors.userId = "Required";
+    }
+    if (!field.email) {
+      errors.email = "Required";
+    }
+    if (!field.password) {
+      errors.password = "Required";
+    }
+    if (!field.cPassword) {
+      errors.cPassword = "Required";
+    }
+
+    // cPassword not same
+    if (field.cPassword && field.password !== field.cPassword) {
+      errors.cPassword = "Invalid password confirmation";
+    }
+
+    // invalid email
+    if (field.email) {
+      const testValid = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/i;
+      if (!testValid.test(field.email)) {
+        errors.email = "Invalid email";
+      }
+    }
+
+    return errors;
+  };
 
   const onSubmit = (values) => {
     console.log(values);
@@ -20,12 +51,13 @@ const SignIn = () => {
           </h1>
           <Form
             onSubmit={onSubmit}
+            validate={validation}
             render={({ handleSubmit, values }) => (
               <form
                 onSubmit={handleSubmit}
-                className="flex flex-col gap-[30px] px-[100px]"
+                className="flex flex-col gap-[10px] px-[100px]"
               >
-                <Field name="userId" validate={required}>
+                <Field name="userId">
                   {({ input, meta }) => (
                     <div className="flex flex-col items-start">
                       <label className="w-full text-left">User Id</label>
@@ -43,7 +75,25 @@ const SignIn = () => {
                     </div>
                   )}
                 </Field>
-                <Field name="password" validate={required}>
+                <Field name="email">
+                  {({ input, meta }) => (
+                    <div className="flex flex-col items-start">
+                      <label className="w-full text-left">Email</label>
+                      <input
+                        {...input}
+                        type="text"
+                        placeholder="Email"
+                        className="w-full form-control mt-[10px] px-[10px] py-[20px] border border-solid border-b-gray-300 rounded transition"
+                      />
+                      {meta.error && meta.touched && (
+                        <span className="text-red-400 text-xs mt-[5px]">
+                          {meta.error}
+                        </span>
+                      )}
+                    </div>
+                  )}
+                </Field>
+                <Field name="password">
                   {({ input, meta }) => (
                     <div className="flex flex-col items-start">
                       <label className="w-full text-left">Password</label>
@@ -61,18 +111,38 @@ const SignIn = () => {
                     </div>
                   )}
                 </Field>
+                <Field name="cPassword">
+                  {({ input, meta }) => (
+                    <div className="flex flex-col items-start">
+                      <label className="w-full text-left">
+                        Confim Password
+                      </label>
+                      <input
+                        {...input}
+                        type="password"
+                        placeholder="Password"
+                        className="w-full form-control mt-[10px] px-[10px] py-[20px] border border-solid border-b-gray-300 rounded transition"
+                      />
+                      {meta.error && meta.touched && (
+                        <span className="text-red-400 text-xs mt-[5px]">
+                          {meta.error}
+                        </span>
+                      )}
+                    </div>
+                  )}
+                </Field>
                 <div className="text-center">
                   <button className="px-[75px] py-[14px] bg-[#0B2F8A] shadow-md text-white rounded-lg">
-                    Sign In
+                    Sign Up
                   </button>
                 </div>
               </form>
             )}
           />
           <span className="mt-[20px] text-sm">
-            Belum punya akun ?,&nbsp;
-            <Link to={"/signup"} className="underline text-blue-400">
-              Daftar sekarang
+            Sudah punya akun ?,&nbsp;
+            <Link to={"/signin"} className="underline text-blue-400">
+              Login sekarang
             </Link>
           </span>
         </div>
@@ -85,4 +155,4 @@ const SignIn = () => {
   );
 };
 
-export default SignIn;
+export default SignUp;

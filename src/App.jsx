@@ -6,11 +6,16 @@ import Wrapper from "./pages/Wrapper";
 import Search from "./pages/Search";
 import Detail from "./pages/Detail";
 import SignIn from "./pages/SignIn";
+import SignUp from "./pages/SignUp";
 
 const router = createBrowserRouter([
   {
     path: "/signin",
     element: <SignIn />,
+  },
+  {
+    path: "/signup",
+    element: <SignUp />,
   },
   {
     path: "/",

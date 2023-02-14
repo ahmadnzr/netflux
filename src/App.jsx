@@ -2,7 +2,7 @@ import "./App.css";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./pages/Home";
-import Wrapper from "./pages/Wrapper";
+import Wrapper from "./components/Wrapper";
 import Search from "./pages/Search";
 import Detail from "./pages/Detail";
 import SignIn from "./pages/SignIn";

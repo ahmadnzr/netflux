@@ -1,12 +1,13 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./App.css";
 
-import Wrapper from "./components/Wrapper";
+import Wrapper from "./layout/Wrapper";
 import Home from "./pages/Home";
 import Search from "./pages/Search";
 import Detail from "./pages/Detail";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
+import Protected from "./layout/Protected";
 
 const router = createBrowserRouter([
   {
@@ -28,17 +29,21 @@ const router = createBrowserRouter([
   {
     path: "/search",
     element: (
-      <Wrapper>
-        <Search />
-      </Wrapper>
+      <Protected>
+        <Wrapper>
+          <Search />
+        </Wrapper>
+      </Protected>
     ),
   },
   {
     path: "/movie/:id",
     element: (
-      <Wrapper>
-        <Detail />
-      </Wrapper>
+      <Protected>
+        <Wrapper>
+          <Detail />
+        </Wrapper>
+      </Protected>
     ),
   },
 ]);

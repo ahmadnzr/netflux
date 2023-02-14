@@ -8,7 +8,7 @@ import {
   batmanDetail,
   searchMovie,
 } from "./movie/reducer";
-import { userReducer } from "./user/reducer";
+import { logginUser, userReducer } from "./user/reducer";
 
 export default createStore(
   combineReducers({
@@ -17,6 +17,7 @@ export default createStore(
     detail: batmanDetail,
     search: searchMovie,
     user: userReducer,
+    login: logginUser,
   }),
   applyMiddleware(thunk)
 );

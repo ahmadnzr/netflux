@@ -27,14 +27,45 @@ export const userReducer = (state = defaultState, action) => {
         isLoading: false,
       };
     }
-    case userType.POPULATE_DATA_USER: {
+    case userType.SET_ERROR_USER: {
       return {
         ...state,
         isLoading: false,
-        data: action.payload,
+        error: action.payload,
       };
     }
-    case userType.SET_ERROR_USER: {
+    default: {
+      return state;
+    }
+  }
+};
+
+export const logginUser = (
+  state = { isLoading: false, data: null, error: null },
+  action
+) => {
+  switch (action.type) {
+    case userType.SET_LOADING_LOGIN: {
+      return {
+        ...state,
+        isLoading: true,
+      };
+    }
+    case userType.ADD_USER_LOGIN: {
+      return {
+        ...state,
+        data: action.payload,
+        isLoading: false,
+      };
+    }
+    case userType.ADD_USER_LOGOUT: {
+      return {
+        ...state,
+        data: null,
+        isLoading: false,
+      };
+    }
+    case userType.SET_ERROR_LOGIN: {
       return {
         ...state,
         isLoading: false,

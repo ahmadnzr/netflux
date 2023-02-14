@@ -1,14 +1,33 @@
-import React from "react";
+import React, { useState } from "react";
 import { Form, Field } from "react-final-form";
-import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
 
 import batman from "../assets/batman.jpg";
+import { login } from "../store/user/service";
 
 const SignIn = () => {
+  const [error, setError] = useState("");
+
+  const { data } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+
+  const navigate = useNavigate();
   const required = (value) => (value ? undefined : "required");
 
   const onSubmit = (values) => {
-    console.log(values);
+    const { userId, password } = values;
+
+    const user = data.find(
+      (usr) => usr.userId === userId && usr.password === password
+    );
+
+    if (user) {
+      dispatch(login(user));
+      navigate("/");
+      return;
+    }
+    setError("invalid userid or password");
   };
 
   return (
@@ -61,8 +80,14 @@ const SignIn = () => {
                     </div>
                   )}
                 </Field>
+                {error.length ? (
+                  <span className="text-xs text-red-500">{error}</span>
+                ) : null}
                 <div className="text-center">
-                  <button className="px-[75px] py-[14px] bg-[#0B2F8A] shadow-md text-white rounded-lg">
+                  <button
+                    className="px-[75px] py-[14px] bg-[#0B2F8A] shadow-md text-white rounded-lg"
+                    type="submit"
+                  >
                     Sign In
                   </button>
                 </div>

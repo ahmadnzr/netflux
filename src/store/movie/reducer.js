@@ -6,22 +6,22 @@ const defaultState = {
   error: null,
 };
 
-const movieReducer = (state = defaultState, action) => {
+export const batmanSeries = (state = defaultState, action) => {
   switch (action.type) {
-    case movieType.SET_LOADING: {
+    case movieType.SET_LOADING_SERIES: {
       return {
         ...state,
         isLoading: true,
       };
     }
-    case movieType.POPULATE_DATA: {
+    case movieType.POPULATE_DATA_SERIES: {
       return {
         ...state,
         isLoading: false,
         data: action.payload,
       };
     }
-    case movieType.SET_ERROR: {
+    case movieType.SET_ERROR_SERIES: {
       return {
         ...state,
         isLoading: false,
@@ -34,4 +34,86 @@ const movieReducer = (state = defaultState, action) => {
   }
 };
 
-export default movieReducer;
+export const batmanMovie = (state = defaultState, action) => {
+  switch (action.type) {
+    case movieType.SET_LOADING_MOVIE: {
+      return {
+        ...state,
+        isLoading: true,
+      };
+    }
+    case movieType.POPULATE_DATA_MOVIE: {
+      return {
+        ...state,
+        isLoading: false,
+        data: action.payload,
+      };
+    }
+    case movieType.SET_ERROR_MOVIE: {
+      return {
+        ...state,
+        isLoading: false,
+        error: action.payload,
+      };
+    }
+    default: {
+      return state;
+    }
+  }
+};
+
+export const batmanDetail = (state = defaultState, action) => {
+  switch (action.type) {
+    case movieType.SET_LOADING_DETAIL: {
+      return {
+        ...state,
+        isLoading: true,
+      };
+    }
+    case movieType.POPULATE_DATA_DETAIL: {
+      return {
+        ...state,
+        isLoading: false,
+        data: action.payload,
+      };
+    }
+    case movieType.SET_ERROR_DETAIL: {
+      return {
+        ...state,
+        isLoading: false,
+        error: action.payload,
+      };
+    }
+    default: {
+      return state;
+    }
+  }
+};
+
+export const searchMovie = (state = defaultState, action) => {
+  switch (action.type) {
+    case movieType.SET_LOADING_SEARCH: {
+      return {
+        ...state,
+        isLoading: true,
+      };
+    }
+    case movieType.POPULATE_DATA_SEARCH: {
+      return {
+        ...state,
+        isLoading: false,
+        data: action.payload,
+      };
+    }
+    case movieType.SET_ERROR_SEARCH: {
+      return {
+        ...state,
+        isLoading: false,
+        error: action.payload,
+      };
+    }
+    default: {
+      return state;
+    }
+  }
+};

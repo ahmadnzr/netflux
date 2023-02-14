@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
-import anime from "../assets/anime.png";
 import { getMovieByTitle } from "../store/movie/service";
+import MovieCard from "../components/MovieCard";
 
 const Search = () => {
   const [search, setSearch] = useState("");
 
-  const { data } = useSelector((state) => state.movie);
+  const { data } = useSelector((state) => state.search);
   const dispatch = useDispatch();
 
   const handleSearch = () => {
@@ -37,35 +37,7 @@ const Search = () => {
       {data?.Search?.length > 0 ? (
         <div className="mt-[100px] grid grid-cols-2 gap-10">
           {data?.Search.map((mv, i) => (
-            <div className="flex items-center gap-[10px] border" key={i}>
-              <img src={mv.Poster} alt="" className="h-[200px] bg-cover" />
-              <div className="flex flex-col gap-2">
-                <div className="flex items-center">
-                  <span className="w-[145px] text-[16px] leading-[12px] text-[#606060]">
-                    Title
-                  </span>
-                  <span className="flex-1">{mv.Title}</span>
-                </div>
-                <div className="flex items-center">
-                  <span className="w-[145px] text-[16px] leading-[12px] text-[#606060]">
-                    Year
-                  </span>
-                  <span className="flex-1">{mv.Year}</span>
-                </div>
-                <div className="flex items-center">
-                  <span className="w-[145px] text-[16px] leading-[12px] text-[#606060]">
-                    ImdbId
-                  </span>
-                  <span className="flex-1">{mv.imdbID}</span>
-                </div>
-                <div className="flex items-center">
-                  <span className="w-[145px] text-[16px] leading-[12px] text-[#606060]">
-                    Type
-                  </span>
-                  <span className="flex-1">{mv.Type}</span>
-                </div>
-              </div>
-            </div>
+            <MovieCard key={i} mv={{ ...mv }} />
           ))}
         </div>
       ) : null}

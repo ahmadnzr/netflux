@@ -8,9 +8,9 @@ const Navbar = () => {
         <Link to={"/"}>Netflux.</Link>
       </h1>
       <div className="flex flex-1 gap-[30px] text-[16px] leading-[20px]">
-        <a href="#home">Home</a>
+        <Link to={"/"}>Home</Link>
         <a href="#movies">Movies</a>
-        <a href="#anime">Anime</a>
+        <a href="#series">Series</a>
       </div>
       <div>
         <Link to={"/search"}>Search</Link>

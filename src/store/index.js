@@ -2,9 +2,14 @@ import thunk from "redux-thunk";
 import { applyMiddleware, combineReducers, createStore } from "redux";
 
 /** file reducers */
-import movieReducer from "./movie/reducer";
+import { batmanSeries, batmanMovie, batmanDetail, searchMovie } from "./movie/reducer";
 
 export default createStore(
-  combineReducers({ movie: movieReducer }),
+  combineReducers({
+    movie: batmanMovie,
+    series: batmanSeries,
+    detail: batmanDetail,
+    search: searchMovie,
+  }),
   applyMiddleware(thunk)
 );

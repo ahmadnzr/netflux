@@ -15,7 +15,7 @@ const settings = {
 };
 
 const Home = () => {
-  const { data } = useSelector((state) => state.recomendation);
+  const { data: recomendation } = useSelector((state) => state.recomendation);
   const { data: topMovie } = useSelector((state) => state.topMovie);
   const dispatch = useDispatch();
 
@@ -29,7 +29,7 @@ const Home = () => {
       <div className="mt-[50px]">
         <h1 className="mb-[20px] text-2xl font-bold">Rekomendasi movie</h1>
         <Slider {...settings}>
-          {data?.map((rc, id) => (
+          {recomendation?.map((rc, id) => (
             <Featured key={id} data={rc} />
           ))}
         </Slider>

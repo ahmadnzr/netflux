@@ -51,6 +51,17 @@ export const getBatmanSeries = () => async (dispatch) => {
   }
 };
 
+const getDetailedMovie = (data) => {
+  const detail_promises = [];
+  for (let i = 0; i < data.length; i++) {
+    console.log(data[i].imdbID);
+    const detail = axios({ method: "get", url: URL + "i=" + data[i].imdbID });
+    detail_promises.push(detail);
+  }
+
+  return Promise.all(detail_promises);
+};
+
 export const getRecomendation = () => async (dispatch) => {
   try {
     dispatch({ type: movieType.SET_LOADING_RECOMENDATION });
@@ -62,10 +73,18 @@ export const getRecomendation = () => async (dispatch) => {
       1,
       5
     );
-    dispatch({
-      type: movieType.POPULATE_DATA_RECOMENDATION,
-      payload: data,
-    });
+
+    getDetailedMovie(data)
+      .then((res) => {
+        const rec = res.map((item) => item.data);
+        dispatch({
+          type: movieType.POPULATE_DATA_RECOMENDATION,
+          payload: rec,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   } catch (err) {
     dispatch({ type: movieType.SET_ERROR_RECOMENDATION, payload: err.message });
   }

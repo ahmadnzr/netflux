@@ -117,3 +117,59 @@ export const searchMovie = (state = defaultState, action) => {
     }
   }
 };
+
+export const recomendation = (state = defaultState, action) => {
+  switch (action.type) {
+    case movieType.SET_LOADING_RECOMENDATION: {
+      return {
+        ...state,
+        isLoading: true,
+      };
+    }
+    case movieType.POPULATE_DATA_RECOMENDATION: {
+      return {
+        ...state,
+        isLoading: false,
+        data: action.payload,
+      };
+    }
+    case movieType.SET_ERROR_RECOMENDATION: {
+      return {
+        ...state,
+        isLoading: false,
+        error: action.payload,
+      };
+    }
+    default: {
+      return state;
+    }
+  }
+};
+
+export const topMovie = (state = defaultState, action) => {
+  switch (action.type) {
+    case movieType.SET_LOADING_TOP: {
+      return {
+        ...state,
+        isLoading: true,
+      };
+    }
+    case movieType.POPULATE_DATA_TOP: {
+      return {
+        ...state,
+        isLoading: false,
+        data: action.payload,
+      };
+    }
+    case movieType.SET_ERROR_TOP: {
+      return {
+        ...state,
+        isLoading: false,
+        error: action.payload,
+      };
+    }
+    default: {
+      return state;
+    }
+  }
+};

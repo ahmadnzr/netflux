@@ -7,6 +7,8 @@ import {
   batmanMovie,
   batmanDetail,
   searchMovie,
+  recomendation,
+  topMovie,
 } from "./movie/reducer";
 import { logginUser, userReducer } from "./user/reducer";
 
@@ -18,6 +20,8 @@ export default createStore(
     search: searchMovie,
     user: userReducer,
     login: logginUser,
+    recomendation: recomendation,
+    topMovie: topMovie,
   }),
   applyMiddleware(thunk)
 );

@@ -50,3 +50,39 @@ export const getBatmanSeries = () => async (dispatch) => {
     dispatch({ type: movieType.SET_ERROR_SERIES, payload: err.message });
   }
 };
+
+export const getRecomendation = () => async (dispatch) => {
+  try {
+    dispatch({ type: movieType.SET_LOADING_RECOMENDATION });
+    const res = await axios({
+      method: "get",
+      url: URL + "s=batman",
+    });
+    const data = res.data.Search.filter((mv) => mv.Poster !== "N/A").slice(
+      1,
+      5
+    );
+    dispatch({
+      type: movieType.POPULATE_DATA_RECOMENDATION,
+      payload: data,
+    });
+  } catch (err) {
+    dispatch({ type: movieType.SET_ERROR_RECOMENDATION, payload: err.message });
+  }
+};
+
+export const getTopMovie = () => async (dispatch) => {
+  try {
+    dispatch({ type: movieType.SET_LOADING_TOP });
+    const res = await axios({
+      method: "get",
+      url: URL + "s=batman&=type=movie?page=2",
+    });
+    dispatch({
+      type: movieType.POPULATE_DATA_TOP,
+      payload: res.data.Search,
+    });
+  } catch (err) {
+    dispatch({ type: movieType.SET_ERROR_TOP, payload: err.message });
+  }
+};

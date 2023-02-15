@@ -8,6 +8,8 @@ import Detail from "./pages/Detail";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 import Protected from "./layout/Protected";
+import Movies from "./pages/Movies";
+import Series from "./pages/Series";
 
 const router = createBrowserRouter([
   {
@@ -23,6 +25,22 @@ const router = createBrowserRouter([
     element: (
       <Wrapper>
         <Home />
+      </Wrapper>
+    ),
+  },
+  {
+    path: "/movies",
+    element: (
+      <Wrapper>
+        <Movies />
+      </Wrapper>
+    ),
+  },
+  {
+    path: "/series",
+    element: (
+      <Wrapper>
+        <Series />
       </Wrapper>
     ),
   },

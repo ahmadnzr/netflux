@@ -20,8 +20,8 @@ const Navbar = () => {
       </h1>
       <div className="flex flex-1 gap-[30px] text-[16px] leading-[20px]">
         <Link to={"/"}>Home</Link>
-        <a href="#movies">Movies</a>
-        <a href="#series">Series</a>
+        <Link to={"/movies"}>Movies</Link>
+        <Link to={"/series"}>Series</Link>
       </div>
       <div>
         <Link to={"/search"}>Search</Link>
